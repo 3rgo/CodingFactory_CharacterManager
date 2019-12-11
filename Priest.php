@@ -103,15 +103,17 @@ class Priest extends Character {
 
         // Compute heal amount (to ensure we don't heal more than the max health)
         $healAmount = min($target->getMaxHealth() - $target->getHealth(), $this->heal);
-        $target->setHealth($target->getHealth() + $healAmount);
+        if($healAmount > 0) {
+            $target->setHealth($target->getHealth() + $healAmount);
 
-        println(sprintf(
-            "\t%s heals %s for %d health, now has %d health points",
-            $this->getName(),
-            ($target->getName() === $this->getName() ? "self" : $target->getName()),
-            $healAmount,
-            $this->health
-        ));
+            println(sprintf(
+                "\t%s heals %s for %d health, now has %d health points",
+                $this->getName(),
+                ($target->getName() === $this->getName() ? "self" : $target->getName()),
+                $healAmount,
+                $this->health
+            ));
+        }
     }
 
     /**
