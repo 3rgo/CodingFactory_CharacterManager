@@ -82,6 +82,7 @@ class CharManager {
                             $this->help();
                             break 2; // Breaks the switch and the inner while
                         case "exit":
+                        case "quit":
                             println("Bye !");
                             return; // Breaks all loops and exits the program
                         default:
