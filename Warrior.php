@@ -77,8 +77,9 @@ class Warrior extends Character {
     public function attack(Character $opponent) {
         $damage = $this->getDamage();
         println(sprintf(
-            "\t%s attacks for %d damage",
+            "\t%s attacks %s for %d damage",
             $this->getName(),
+            $opponent->getName(),
             $damage
         ));
         $opponent->defend($this->getDamage());

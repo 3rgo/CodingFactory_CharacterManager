@@ -135,8 +135,9 @@ class Thief extends Character {
             $this->lastHitCritical = false;
         }
         println(sprintf(
-            "\t%s attacks for %d damage%s",
+            "\t%s attacks %s for %d damage%s",
             $this->getName(),
+            $opponent->getName(),
             $damage,
             ($isCritical ? " (CRITICAL !)" : "")
         ));

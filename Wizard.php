@@ -91,8 +91,9 @@ class Wizard extends Character {
         $magicdamage = $this->getMagicDamage();
         $total = $damage + $magicdamage;
         println(sprintf(
-            "\t%s attacks for %d damage (%d base + %d magic damage)",
+            "\t%s attacks %s for %d damage (%d base + %d magic damage)",
             $this->getName(),
+            $opponent->getName(),
             $total,
             $damage,
             $magicdamage

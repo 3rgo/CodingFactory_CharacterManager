@@ -341,7 +341,7 @@ class CharManager {
         $chars = array_chunk($chars, $teamSize);
         $chars = array_combine(["A", "B"], $chars);
 
-        // Sort the teams by combined initiative value
+        // Sort the teams by combined initiative value, but keep the keys
         uasort($chars, function($a, $b){
             $initA = array_map(function($c){ return $c->getInitiative(); }, $a);
             $initB = array_map(function($c){ return $c->getInitiative(); }, $b);
