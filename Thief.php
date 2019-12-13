@@ -42,6 +42,11 @@ class Thief extends Character {
     protected $criticalchance;
 
     /**
+     * @var bool Was last hit a critical ?
+     */
+    protected $lastHitCritical;
+
+    /**
      * Constructor
      *
      * @param string $name           Character name.
@@ -54,8 +59,9 @@ class Thief extends Character {
      */
     public function __construct($name, $damage, $health, $initiative, $dodgechance, $criticalchance){
         parent::__construct($name, $damage, $health, $initiative);
-        $this->dodgechance    = $dodgechance;
-        $this->criticalchance = $criticalchance;
+        $this->dodgechance     = $dodgechance;
+        $this->criticalchance  = $criticalchance;
+        $this->lastHitCritical = false;
     }
 
     /**
@@ -120,10 +126,13 @@ class Thief extends Character {
      */
     public function attack(Character $opponent) {
         $damage = $this->getDamage();
-        // Compute critical hits
-        $isCritical = $this->getCriticalChance() < random_int(1, 100);
+        // Compute critical hits (boolean lastHitCritical prevents 2 critical hits in a row)
+        $isCritical = !$this->lastHitCritical && $this->getCriticalChance() < random_int(1, 100);
         if($isCritical){
             $damage *= 2;
+            $this->lastHitCritical = true;
+        } else {
+            $this->lastHitCritical = false;
         }
         println(sprintf(
             "\t%s attacks for %d damage%s",
