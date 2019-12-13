@@ -163,6 +163,7 @@ class CharManager {
             throw new \Exception("Given number ($characterId) matches no character");
         }
 
+        // Print an object will automatically call the __toString method
         println($this->summon($characterId-1));
         println("");
         println("Press Enter to return to the menu");
@@ -229,6 +230,8 @@ class CharManager {
             throw new \Exception("Not enough characters to fight");
         }
         $this->header();
+
+        // Character selection
         println("1st character number :");
         $char1 = intval(trim(fgets(STDIN)));
         if(!in_array($char1, range(1, count($this->characterList)))){
@@ -290,7 +293,7 @@ class CharManager {
     }
 
     /**
-     * Starts a team fight (2v2)
+     * Starts a team fight (X v X characters)
      */
     private function teamfight() {
         // Ask the number of characters per team
